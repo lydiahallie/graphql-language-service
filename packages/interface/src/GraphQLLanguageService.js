@@ -13,9 +13,8 @@ import type {
   FragmentSpreadNode,
   FragmentDefinitionNode,
   OperationDefinitionNode,
-  ObjectTypeDefinitionNode,
-  InputObjectTypeDefinitionNode,
-  EnumTypeDefinitionNode,
+  TypeDefinitionNode,
+  TypeExtensionNode,
   NamedTypeNode,
 } from 'graphql';
 import type {
@@ -268,18 +267,11 @@ export class GraphQLLanguageService {
     );
 
     const typeCastedDefs = ((localObjectTypeDefinitions: any): Array<
-      | ObjectTypeDefinitionNode
-      | InputObjectTypeDefinitionNode
-      | EnumTypeDefinitionNode,
+      TypeDefinitionNode | TypeExtensionNode,
     >);
 
     const localOperationDefinationInfos = typeCastedDefs.map(
-      (
-        definition:
-          | ObjectTypeDefinitionNode
-          | InputObjectTypeDefinitionNode
-          | EnumTypeDefinitionNode,
-      ) => ({
+      (definition: TypeDefinitionNode | TypeExtensionNode) => ({
         filePath,
         content: query,
         definition,

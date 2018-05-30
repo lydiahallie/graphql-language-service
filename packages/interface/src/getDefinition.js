@@ -14,6 +14,8 @@ import type {
   FragmentDefinitionNode,
   OperationDefinitionNode,
   NamedTypeNode,
+  TypeDefinitionNode,
+  TypeExtensionNode,
 } from 'graphql';
 import type {
   Definition,
@@ -22,7 +24,7 @@ import type {
   Position,
   Range,
   Uri,
-  NamedTypeInfo,
+  ObjectTypeInfo,
 } from 'graphql-language-service-types';
 import {locToRange, offsetToPosition} from 'graphql-language-service-utils';
 import invariant from 'assert';
@@ -44,11 +46,11 @@ function getPosition(text: string, node: ASTNode): Position {
 export async function getDefinitionQueryResultForNamedType(
   text: string,
   node: NamedTypeNode,
-  dependencies: Array<NamedTypeInfo>,
+  dependencies: Array<ObjectTypeInfo>,
 ): Promise<DefinitionQueryResult> {
   const name = node.name.value;
   const defNodes = dependencies.filter(
-    ({definition}) => definition.name.value === name,
+    ({definition}) => definition.name && definition.name.value === name,
   );
   if (defNodes.length === 0) {
     process.stderr.write(`Definition not found for GraphQL type ${name}`);
@@ -121,7 +123,7 @@ function getDefinitionForFragmentDefinition(
 function getDefinitionForNodeDefinition(
   path: Uri,
   text: string,
-  definition: NamedTypeNode,
+  definition: TypeDefinitionNode | TypeExtensionNode,
 ): Definition {
   const name = definition.name;
   invariant(name, 'Expected ASTNode to have a Name.');
