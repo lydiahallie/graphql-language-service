@@ -14,6 +14,7 @@ Currently supported features include:
 - Diagnostics (GraphQL syntax linting/validations) (**spec-compliant**)
 - Autocomplete suggestions (**spec-compliant**)
 - Hyperlink to fragment definitions (**spec-compliant**)
+- Hyperlink to named types (type, input, enum) definitions (**spec-compliant**)
 - Outline view support for queries
 
 

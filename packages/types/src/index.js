@@ -13,6 +13,7 @@ import type {
   ASTNode,
   DocumentNode,
   FragmentDefinitionNode,
+  NamedType,
 } from 'graphql/language';
 import type {ValidationContext} from 'graphql/validation';
 import type {
@@ -81,6 +82,20 @@ export type GraphQLConfigurationExtension = {
 
 export interface GraphQLCache {
   getGraphQLConfig: () => GraphQLConfig,
+
+  getObjectTypeDependencies: (
+    query: string,
+    fragmentDefinitions: ?Map<string, ObjectTypeInfo>,
+  ) => Promise<Array<ObjectTypeInfo>>,
+
+  getObjectTypeDependenciesForAST: (
+    parsedQuery: ASTNode,
+    fragmentDefinitions: Map<string, ObjectTypeInfo>,
+  ) => Promise<Array<ObjectTypeInfo>>,
+
+  getObjectTypeDefinitions: (
+    graphQLConfig: GraphQLProjectConfig,
+  ) => Promise<Map<string, ObjectTypeInfo>>,
 
   getFragmentDependencies: (
     query: string,
@@ -210,6 +225,21 @@ export type FragmentInfo = {
   filePath?: Uri,
   content: string,
   definition: FragmentDefinitionNode,
+};
+
+export type NamedTypeInfo = {
+  filePath?: Uri,
+  content: string,
+  definition: NamedType,
+};
+
+export type ObjectTypeInfo = {
+  filePath?: Uri,
+  content: string,
+  definition:
+    | ObjectTypeDefinition
+    | InputObjectTypeDefinition
+    | EnumTypeDefinition,
 };
 
 export type CustomValidationRule = (context: ValidationContext) => Object;
