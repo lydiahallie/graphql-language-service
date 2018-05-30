@@ -22,7 +22,7 @@ import type {
 } from 'graphql-language-service-types';
 
 import invariant from 'assert';
-import {findDeprecatedUsages, parse} from 'graphql';
+import {findDeprecatedUsages, parse, validateSchema} from 'graphql';
 import {CharacterStream, onlineParser} from 'graphql-language-service-parser';
 import {
   Position,
@@ -43,6 +43,22 @@ export function getDiagnostics(
   customRules?: Array<CustomValidationRule>,
   isRelayCompatMode?: boolean,
 ): Array<Diagnostic> {
+  let errors = [];
+  if (schema) {
+    errors = validateSchema(schema);
+  }
+  if (errors.length > 0) {
+    return errors.map(error => {
+      const range = getRange(error.locations[0], query);
+      return {
+        severity: SEVERITY.ERROR,
+        message: error.message,
+        source: 'GraphQL: Validate Schema',
+        range,
+      };
+    });
+  }
+
   let ast = null;
   try {
     ast = parse(query);
