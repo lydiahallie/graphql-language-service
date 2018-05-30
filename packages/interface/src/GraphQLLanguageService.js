@@ -13,7 +13,10 @@ import type {
   FragmentSpreadNode,
   FragmentDefinitionNode,
   OperationDefinitionNode,
-  NamedType,
+  ObjectTypeDefinitionNode,
+  InputObjectTypeDefinitionNode,
+  EnumTypeDefinitionNode,
+  NamedTypeNode,
 } from 'graphql';
 import type {
   CompletionItem,
@@ -243,7 +246,7 @@ export class GraphQLLanguageService {
   async _getDefinitionForNamedType(
     query: string,
     ast: DocumentNode,
-    node: NamedType,
+    node: NamedTypeNode,
     filePath: Uri,
     projectConfig: GraphQLProjectConfig,
   ): Promise<?DefinitionQueryResult> {
@@ -265,15 +268,17 @@ export class GraphQLLanguageService {
     );
 
     const typeCastedDefs = ((localObjectTypeDefinitions: any): Array<
-      ObjectTypeDefinition | InputObjectTypeDefinition | EnumTypeDefinition,
+      | ObjectTypeDefinitionNode
+      | InputObjectTypeDefinitionNode
+      | EnumTypeDefinitionNode,
     >);
 
     const localOperationDefinationInfos = typeCastedDefs.map(
       (
         definition:
-          | ObjectTypeDefinition
-          | InputObjectTypeDefinition
-          | EnumTypeDefinition,
+          | ObjectTypeDefinitionNode
+          | InputObjectTypeDefinitionNode
+          | EnumTypeDefinitionNode,
       ) => ({
         filePath,
         content: query,
