@@ -13,7 +13,10 @@ import type {
   ASTNode,
   DocumentNode,
   FragmentDefinitionNode,
-  NamedType,
+  NamedTypeNode,
+  ObjectTypeDefinitionNode,
+  InputObjectTypeDefinitionNode,
+  EnumTypeDefinitionNode,
 } from 'graphql/language';
 import type {ValidationContext} from 'graphql/validation';
 import type {
@@ -230,16 +233,16 @@ export type FragmentInfo = {
 export type NamedTypeInfo = {
   filePath?: Uri,
   content: string,
-  definition: NamedType,
+  definition: NamedTypeNode,
 };
 
 export type ObjectTypeInfo = {
   filePath?: Uri,
   content: string,
   definition:
-    | ObjectTypeDefinition
-    | InputObjectTypeDefinition
-    | EnumTypeDefinition,
+    | ObjectTypeDefinitionNode
+    | InputObjectTypeDefinitionNode
+    | EnumTypeDefinitionNode,
 };
 
 export type CustomValidationRule = (context: ValidationContext) => Object;
