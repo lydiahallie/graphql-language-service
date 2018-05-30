@@ -33,7 +33,7 @@ describe('GraphQLLanguageService', () => {
 
   it('runs diagnostic service as expected', async () => {
     const diagnostics = await languageService.getDiagnostics(
-      'qeury',
+      'query',
       './queries/testQuery.graphql',
     );
     expect(diagnostics.length).to.equal(1);
