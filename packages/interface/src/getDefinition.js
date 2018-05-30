@@ -39,6 +39,30 @@ function getPosition(text: string, node: ASTNode): Position {
   return offsetToPosition(text, location.start);
 }
 
+export async function getDefinitionQueryResultForNamedType(
+  text: string,
+  node: NamedType,
+  dependencies: Array<NamedTypeInfo>,
+): Promise<DefinitionQueryResult> {
+  const name = node.name.value;
+  const defNodes = dependencies.filter(
+    ({definition}) => definition.name.value === name,
+  );
+  if (defNodes.length === 0) {
+    process.stderr.write(`Definition not found for GraphQL type ${name}`);
+    return {queryRange: [], definitions: []};
+  }
+  const definitions: Array<
+    Definition,
+  > = defNodes.map(({filePath, content, definition}) =>
+    getDefinitionForNodeDefinition(filePath || '', content, definition),
+  );
+  return {
+    definitions,
+    queryRange: definitions.map(_ => getRange(text, node)),
+  };
+}
+
 export async function getDefinitionQueryResultForFragmentSpread(
   text: string,
   fragment: FragmentSpreadNode,
@@ -83,7 +107,25 @@ function getDefinitionForFragmentDefinition(
   invariant(name, 'Expected ASTNode to have a Name.');
   return {
     path,
-    position: getPosition(text, name),
+    position: getPosition(text, definition),
+    range: getRange(text, definition),
+    name: name.value || '',
+    language: LANGUAGE,
+    // This is a file inside the project root, good enough for now
+    projectRoot: path,
+  };
+}
+
+function getDefinitionForNodeDefinition(
+  path: Uri,
+  text: string,
+  definition: NamedType,
+): Definition {
+  const name = definition.name;
+  invariant(name, 'Expected ASTNode to have a Name.');
+  return {
+    path,
+    position: getPosition(text, definition),
     range: getRange(text, definition),
     name: name.value || '',
     language: LANGUAGE,
