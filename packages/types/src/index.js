@@ -15,7 +15,6 @@ import type {
   FragmentDefinitionNode,
   NamedTypeNode,
   TypeDefinitionNode,
-  TypeExtensionNode,
 } from 'graphql/language';
 import type {ValidationContext} from 'graphql/validation';
 import type {
@@ -238,7 +237,7 @@ export type NamedTypeInfo = {
 export type ObjectTypeInfo = {
   filePath?: Uri,
   content: string,
-  definition: TypeDefinitionNode | TypeExtensionNode,
+  definition: TypeDefinitionNode,
 };
 
 export type CustomValidationRule = (context: ValidationContext) => Object;

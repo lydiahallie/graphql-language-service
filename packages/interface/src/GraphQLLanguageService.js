@@ -14,7 +14,6 @@ import type {
   FragmentDefinitionNode,
   OperationDefinitionNode,
   TypeDefinitionNode,
-  TypeExtensionNode,
   NamedTypeNode,
 } from 'graphql';
 import type {
@@ -258,20 +257,19 @@ export class GraphQLLanguageService {
       objectTypeDefinitions,
     );
 
-    const localObjectTypeDefinitions = ast.definitions.filter(definition =>
-      [
-        OBJECT_TYPE_DEFINITION,
-        INPUT_OBJECT_TYPE_DEFINITION,
-        ENUM_TYPE_DEFINITION,
-      ].includes(definition.kind),
+    const localObjectTypeDefinitions = ast.definitions.filter(
+      definition =>
+        definition.kind === OBJECT_TYPE_DEFINITION ||
+        definition.kind === INPUT_OBJECT_TYPE_DEFINITION ||
+        definition.kind === ENUM_TYPE_DEFINITION,
     );
 
     const typeCastedDefs = ((localObjectTypeDefinitions: any): Array<
-      TypeDefinitionNode | TypeExtensionNode,
+      TypeDefinitionNode,
     >);
 
     const localOperationDefinationInfos = typeCastedDefs.map(
-      (definition: TypeDefinitionNode | TypeExtensionNode) => ({
+      (definition: TypeDefinitionNode) => ({
         filePath,
         content: query,
         definition,

@@ -725,11 +725,9 @@ export class GraphQLCache implements GraphQLCacheInterface {
               });
             }
             if (
-              [
-                OBJECT_TYPE_DEFINITION,
-                INPUT_OBJECT_TYPE_DEFINITION,
-                ENUM_TYPE_DEFINITION,
-              ].includes(definition.kind)
+              definition.kind === OBJECT_TYPE_DEFINITION ||
+              definition.kind === INPUT_OBJECT_TYPE_DEFINITION ||
+              definition.kind === ENUM_TYPE_DEFINITION
             ) {
               objectTypeDefinitions.set(definition.name.value, {
                 filePath,
