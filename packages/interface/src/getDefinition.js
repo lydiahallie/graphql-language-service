@@ -15,7 +15,6 @@ import type {
   OperationDefinitionNode,
   NamedTypeNode,
   TypeDefinitionNode,
-  TypeExtensionNode,
 } from 'graphql';
 import type {
   Definition,
@@ -123,7 +122,7 @@ function getDefinitionForFragmentDefinition(
 function getDefinitionForNodeDefinition(
   path: Uri,
   text: string,
-  definition: TypeDefinitionNode | TypeExtensionNode,
+  definition: TypeDefinitionNode,
 ): Definition {
   const name = definition.name;
   invariant(name, 'Expected ASTNode to have a Name.');
