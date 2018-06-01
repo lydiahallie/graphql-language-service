@@ -98,6 +98,18 @@ export interface GraphQLCache {
     graphQLConfig: GraphQLProjectConfig,
   ) => Promise<Map<string, ObjectTypeInfo>>;
 
+  +updateObjectTypeDefinition: (
+    rootDir: Uri,
+    filePath: Uri,
+    contents: Array<CachedContent>,
+  ) => Promise<void>;
+
+  +updateObjectTypeDefinitionCache: (
+    rootDir: Uri,
+    filePath: Uri,
+    exists: boolean,
+  ) => Promise<void>;
+
   getFragmentDependencies: (
     query: string,
     fragmentDefinitions: ?Map<string, FragmentInfo>,

@@ -342,6 +342,7 @@ export class GraphQLCache implements GraphQLCacheInterface {
           }
 
           this.updateFragmentDefinitionCache(rootDir, filePath, exists);
+          this.updateObjectTypeDefinitionCache(rootDir, filePath, exists);
         }
       });
     }
@@ -489,6 +490,73 @@ export class GraphQLCache implements GraphQLCacheInterface {
       }
     } else if (fileAndContent && fileAndContent.queries) {
       this.updateFragmentDefinition(rootDir, filePath, fileAndContent.queries);
+    }
+  }
+
+  async updateObjectTypeDefinition(
+    rootDir: Uri,
+    filePath: Uri,
+    contents: Array<CachedContent>,
+  ): Promise<void> {
+    const cache = this._typeDefinitionsCache.get(rootDir);
+    const asts = contents.map(({query}) => {
+      try {
+        return {ast: parse(query), query};
+      } catch (error) {
+        return {ast: null, query};
+      }
+    });
+    if (cache) {
+      // first go through the types list to delete the ones from this file
+      cache.forEach((value, key) => {
+        if (value.filePath === filePath) {
+          cache.delete(key);
+        }
+      });
+      asts.forEach(({ast, query}) => {
+        if (!ast) {
+          return;
+        }
+        ast.definitions.forEach(definition => {
+          if (
+            definition.kind === OBJECT_TYPE_DEFINITION ||
+            definition.kind === INPUT_OBJECT_TYPE_DEFINITION ||
+            definition.kind === ENUM_TYPE_DEFINITION
+          ) {
+            cache.set(definition.name.value, {
+              filePath,
+              content: query,
+              definition,
+            });
+          }
+        });
+      });
+    }
+  }
+
+  async updateObjectTypeDefinitionCache(
+    rootDir: Uri,
+    filePath: Uri,
+    exists: boolean,
+  ): Promise<void> {
+    const fileAndContent = exists
+      ? await this.promiseToReadGraphQLFile(filePath)
+      : null;
+    // In the case of type definitions, the cache could just map the
+    // definition name to the parsed ast, whether or not it existed
+    // previously.
+    // For delete, remove the entry from the set.
+    if (!exists) {
+      const cache = this._typeDefinitionsCache.get(rootDir);
+      if (cache) {
+        cache.delete(filePath);
+      }
+    } else if (fileAndContent && fileAndContent.queries) {
+      this.updateObjectTypeDefinition(
+        rootDir,
+        filePath,
+        fileAndContent.queries,
+      );
     }
   }
 
