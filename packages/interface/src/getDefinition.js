@@ -55,10 +55,9 @@ export async function getDefinitionQueryResultForNamedType(
     process.stderr.write(`Definition not found for GraphQL type ${name}`);
     return {queryRange: [], definitions: []};
   }
-  const definitions: Array<
-    Definition,
-  > = defNodes.map(({filePath, content, definition}) =>
-    getDefinitionForNodeDefinition(filePath || '', content, definition),
+  const definitions: Array<Definition> = defNodes.map(
+    ({filePath, content, definition}) =>
+      getDefinitionForNodeDefinition(filePath || '', content, definition),
   );
   return {
     definitions,

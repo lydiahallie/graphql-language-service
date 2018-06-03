@@ -87,16 +87,16 @@ export interface GraphQLCache {
   getObjectTypeDependencies: (
     query: string,
     fragmentDefinitions: ?Map<string, ObjectTypeInfo>,
-  ) => Promise<Array<ObjectTypeInfo>>,
+  ) => Promise<Array<ObjectTypeInfo>>;
 
   getObjectTypeDependenciesForAST: (
     parsedQuery: ASTNode,
     fragmentDefinitions: Map<string, ObjectTypeInfo>,
-  ) => Promise<Array<ObjectTypeInfo>>,
+  ) => Promise<Array<ObjectTypeInfo>>;
 
   getObjectTypeDefinitions: (
     graphQLConfig: GraphQLProjectConfig,
-  ) => Promise<Map<string, ObjectTypeInfo>>,
+  ) => Promise<Map<string, ObjectTypeInfo>>;
 
   +updateObjectTypeDefinition: (
     rootDir: Uri,
