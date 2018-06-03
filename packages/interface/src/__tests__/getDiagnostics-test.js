@@ -52,14 +52,9 @@ describe('getDiagnostics', () => {
     expect(errors.length).to.equal(0);
   });
 
-  it('returns no errors for valid query', () => {
-    const errors = getDiagnostics('query { hero { name } }', schema);
-    expect(errors.length).to.equal(0);
-  });
-
   it('returns no errors for valid query with aliases', () => {
     const errors = getDiagnostics(
-      'query { superHero: hero { superName :name } }',
+      'query { superHero: hero { superName: name } superHero2: hero { superName2: name } }',
       schema,
     );
     expect(errors.length).to.equal(0);
@@ -69,7 +64,7 @@ describe('getDiagnostics', () => {
     const errors = getDiagnostics(
       `
         type Human implements Character {
-          SyntaxError
+          field_without_type_is_a_syntax_error
           id: String!
         }
       `,

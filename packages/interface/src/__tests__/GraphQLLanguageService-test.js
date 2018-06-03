@@ -33,9 +33,11 @@ describe('GraphQLLanguageService', () => {
 
   it('runs diagnostic service as expected', async () => {
     const diagnostics = await languageService.getDiagnostics(
-      'query',
+      'qeury',
       './queries/testQuery.graphql',
     );
     expect(diagnostics.length).to.equal(1);
+    const diagnostic = diagnostics[0];
+    expect(diagnostic.message).to.equal('Syntax Error: Unexpected Name "qeury"')
   });
 });
