@@ -64,7 +64,7 @@ export class GraphQLLanguageService {
   _graphQLConfig: GraphQLConfig;
   _extensions: Array<any>;
 
-  constructor(cache: GraphQLCache, extensions: Array<any>) {
+  constructor(cache: GraphQLCache, extensions: ?Array<any>) {
     this._graphQLCache = cache;
     this._graphQLConfig = cache.getGraphQLConfig();
     this._extensions = extensions;
