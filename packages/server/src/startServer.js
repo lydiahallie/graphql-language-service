@@ -111,7 +111,7 @@ function addHandlers(
   connection: MessageConnection,
   configDir?: string,
   logger: Logger,
-  extensions?: Array<GraphqlConfig>,
+  extensions?: Array<GraphQLConfig>,
 ): void {
   const messageProcessor = new MessageProcessor(
     logger,
