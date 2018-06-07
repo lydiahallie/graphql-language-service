@@ -78,6 +78,13 @@ export class GraphQLLanguageService {
     // Perform syntax diagnostics first, as this doesn't require
     // schema/fragment definitions, even the project configuration.
     let queryHasExtensions = false;
+    if (this._extensions && this._extensions.length > 0) {
+      await Promise.all(
+        this._extensions.map(async extension => {
+          this._graphQLConfig = await extension(this._graphQLConfig);
+        }),
+      );
+    }
     const projectConfig = this._graphQLConfig.getConfigForFile(uri);
     const schemaPath = projectConfig.schemaPath;
     try {
@@ -171,6 +178,13 @@ export class GraphQLLanguageService {
     position: Position,
     filePath: Uri,
   ): Promise<Array<CompletionItem>> {
+    if (this._extensions && this._extensions.length > 0) {
+      await Promise.all(
+        this._extensions.map(async extension => {
+          this._graphQLConfig = await extension(this._graphQLConfig);
+        }),
+      );
+    }
     const projectConfig = this._graphQLConfig.getConfigForFile(filePath);
     const schema = await this._graphQLCache
       .getSchema(projectConfig.projectName)
@@ -187,6 +201,13 @@ export class GraphQLLanguageService {
     position: Position,
     filePath: Uri,
   ): Promise<Hover.contents> {
+    if (this._extensions && this._extensions.length > 0) {
+      await Promise.all(
+        this._extensions.map(async extension => {
+          this._graphQLConfig = await extension(this._graphQLConfig);
+        }),
+      );
+    }
     const projectConfig = this._graphQLConfig.getConfigForFile(filePath);
     const schema = await this._graphQLCache
       .getSchema(projectConfig.projectName)
@@ -203,6 +224,13 @@ export class GraphQLLanguageService {
     position: Position,
     filePath: Uri,
   ): Promise<?DefinitionQueryResult> {
+    if (this._extensions && this._extensions.length > 0) {
+      await Promise.all(
+        this._extensions.map(async extension => {
+          this._graphQLConfig = await extension(this._graphQLConfig);
+        }),
+      );
+    }
     const projectConfig = this._graphQLConfig.getConfigForFile(filePath);
 
     let ast;
