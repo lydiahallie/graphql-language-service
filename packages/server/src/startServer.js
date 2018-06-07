@@ -48,7 +48,8 @@ type Options = {
   method?: string,
   configDir?: string,
   extensions?: Array<GraphQLConfig>,
-}; 'graphql-language-service-types';
+};
+('graphql-language-service-types');
 
 export default (async function startServer(options: Options): Promise<void> {
   const logger = new Logger();
