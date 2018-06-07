@@ -71,12 +71,12 @@ export class MessageProcessor {
 
   _logger: Logger;
 
-  _extensions: ?Array<any>;
+  _extensions: ?Array<GraphQLConfig>;
 
   constructor(
     logger: Logger,
     watchmanClient: GraphQLWatchman,
-    extensions?: Array<any>,
+    extensions?: Array<GraphQLConfig>,
   ): void {
     this._textDocumentCache = new Map();
     this._isInitialized = false;

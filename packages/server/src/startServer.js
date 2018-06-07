@@ -46,7 +46,7 @@ type Options = {
   port?: number,
   method?: string,
   configDir?: string,
-  extensions?: Array<any>,
+  extensions?: Array<GraphQLConfig>,
 };
 
 export default (async function startServer(options: Options): Promise<void> {
@@ -109,7 +109,7 @@ function addHandlers(
   connection: MessageConnection,
   configDir?: string,
   logger: Logger,
-  extensions?: Array<any>,
+  extensions?: Array<GraphqlConfig>,
 ): void {
   const messageProcessor = new MessageProcessor(
     logger,

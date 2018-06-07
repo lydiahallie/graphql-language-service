@@ -53,7 +53,7 @@ const MAX_READS = 200;
 
 export async function getGraphQLCache(
   configDir: Uri,
-  extensions: ?Array<any>,
+  extensions: ?Array<GraphQLConfig>,
 ): Promise<GraphQLCacheInterface> {
   let graphQLConfig = await getGraphQLConfig(configDir);
   if (extensions && extensions.length > 0) {
@@ -75,12 +75,12 @@ export class GraphQLCache implements GraphQLCacheInterface {
   _typeExtensionMap: Map<Uri, number>;
   _fragmentDefinitionsCache: Map<Uri, Map<string, FragmentInfo>>;
   _typeDefinitionsCache: Map<Uri, Map<string, ObjectTypeInfo>>;
-  _extensions: ?Array<any>;
+  _extensions: ?Array<GraphQLConfig>;
 
   constructor(
     configDir: Uri,
     graphQLConfig: GraphQLConfig,
-    extensions: ?Array<any>,
+    extensions: ?Array<GraphQLConfig>,
   ): void {
     this._configDir = configDir;
     this._graphQLConfig = graphQLConfig;
