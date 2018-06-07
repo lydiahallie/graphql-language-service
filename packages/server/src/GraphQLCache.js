@@ -53,9 +53,10 @@ const MAX_READS = 200;
 
 export async function getGraphQLCache(
   configDir: Uri,
+  extensions: ?Array<any>,
 ): Promise<GraphQLCacheInterface> {
   const graphQLConfig = await getGraphQLConfig(configDir);
-  return new GraphQLCache(configDir, graphQLConfig);
+  return new GraphQLCache(configDir, graphQLConfig, extensions);
 }
 
 export class GraphQLCache implements GraphQLCacheInterface {
@@ -67,8 +68,13 @@ export class GraphQLCache implements GraphQLCacheInterface {
   _typeExtensionMap: Map<Uri, number>;
   _fragmentDefinitionsCache: Map<Uri, Map<string, FragmentInfo>>;
   _typeDefinitionsCache: Map<Uri, Map<string, ObjectTypeInfo>>;
+  _extensions: ?Array<any>;
 
-  constructor(configDir: Uri, graphQLConfig: GraphQLConfig): void {
+  constructor(
+    configDir: Uri,
+    graphQLConfig: GraphQLConfig,
+    extensions: ?Array<any>,
+  ): void {
     this._configDir = configDir;
     this._graphQLConfig = graphQLConfig;
     this._graphQLFileListCache = new Map();
@@ -76,6 +82,7 @@ export class GraphQLCache implements GraphQLCacheInterface {
     this._fragmentDefinitionsCache = new Map();
     this._typeDefinitionsCache = new Map();
     this._typeExtensionMap = new Map();
+    this._extensions = extensions;
   }
 
   getGraphQLConfig = (): GraphQLConfigInterface => this._graphQLConfig;
@@ -626,6 +633,13 @@ export class GraphQLCache implements GraphQLCacheInterface {
     appName: ?string,
     queryHasExtensions?: ?boolean = false,
   ): Promise<?GraphQLSchema> => {
+    if (this._extensions && this._extensions.length > 0) {
+      await Promise.all(
+        this._extensions.map(async extension => {
+          this._graphQLConfig = await extension(this._graphQLConfig);
+        }),
+      );
+    }
     const projectConfig = this._graphQLConfig.getProjectConfig(appName);
 
     if (!projectConfig) {

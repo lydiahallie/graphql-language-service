@@ -115,7 +115,7 @@ export class MessageProcessor {
       );
     }
 
-    this._graphQLCache = await getGraphQLCache(rootPath);
+    this._graphQLCache = await getGraphQLCache(rootPath, this._extensions);
     let config = getGraphQLConfig(rootPath);
     if (this._extensions && this._extensions.length > 0) {
       await Promise.all(
@@ -128,7 +128,10 @@ export class MessageProcessor {
     if (this._watchmanClient) {
       this._subcribeWatchman(config, this._watchmanClient);
     }
-    this._languageService = new GraphQLLanguageService(this._graphQLCache);
+    this._languageService = new GraphQLLanguageService(
+      this._graphQLCache,
+      this._extensions,
+    );
 
     if (!serverCapabilities) {
       throw new Error('GraphQL Language Server is not initialized.');
