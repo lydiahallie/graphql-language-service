@@ -47,7 +47,7 @@ type Options = {
   port?: number,
   method?: string,
   configDir?: string,
-  extensions?: Array <GraphQLConfig>,
+  extensions?: Array<GraphQLConfig>,
 };
 
 export default (async function startServer(options: Options): Promise<void> {
