@@ -12,6 +12,7 @@ import net from 'net';
 
 import {GraphQLWatchman} from './GraphQLWatchman';
 import {MessageProcessor} from './MessageProcessor';
+import {GraphqlConfig} from 'graphql-config';
 
 import {
   createMessageConnection,
