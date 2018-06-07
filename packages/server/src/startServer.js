@@ -12,7 +12,7 @@ import net from 'net';
 
 import {GraphQLWatchman} from './GraphQLWatchman';
 import {MessageProcessor} from './MessageProcessor';
-import {GraphqlConfig} from 'graphql-config';
+import type {GraphqlConfig} from 'graphql-config';
 
 import {
   createMessageConnection,
@@ -47,7 +47,7 @@ type Options = {
   port?: number,
   method?: string,
   configDir?: string,
-  extensions?: Array<GraphQLConfig>,
+  extensions?: Array <GraphQLConfig>,
 };
 
 export default (async function startServer(options: Options): Promise<void> {
