@@ -71,13 +71,21 @@ export class MessageProcessor {
 
   _logger: Logger;
 
-  constructor(logger: Logger, watchmanClient: GraphQLWatchman): void {
+  _extensions: ?Array<any>;
+
+  constructor(
+    logger: Logger,
+    watchmanClient: GraphQLWatchman,
+    extensions?: Array<any>,
+  ): void {
     this._textDocumentCache = new Map();
     this._isInitialized = false;
     this._willShutdown = false;
 
     this._logger = logger;
     this._watchmanClient = watchmanClient;
+
+    this._extensions = extensions;
   }
 
   async handleInitializeRequest(
@@ -108,7 +116,15 @@ export class MessageProcessor {
     }
 
     this._graphQLCache = await getGraphQLCache(rootPath);
-    const config = getGraphQLConfig(rootPath);
+    let config = getGraphQLConfig(rootPath);
+    if (this._extensions && this._extensions.length > 0) {
+      await Promise.all(
+        this._extensions.map(async extension => {
+          config = await extension(config);
+        }),
+      );
+    }
+
     if (this._watchmanClient) {
       this._subcribeWatchman(config, this._watchmanClient);
     }
