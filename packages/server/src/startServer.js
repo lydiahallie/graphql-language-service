@@ -47,7 +47,7 @@ type Options = {
   port?: number,
   method?: string,
   configDir?: string,
-  extensions?: Array<GraphQLConfig>,
+  extensions?: Array<(config: GraphQLConfig) => GraphQLConfig>,
 };
 ('graphql-language-service-types');
 
@@ -111,7 +111,7 @@ function addHandlers(
   connection: MessageConnection,
   configDir?: string,
   logger: Logger,
-  extensions?: Array<GraphQLConfig>,
+  extensions?: Array<(config: GraphQLConfig) => GraphQLConfig>,
 ): void {
   const messageProcessor = new MessageProcessor(
     logger,
