@@ -118,7 +118,7 @@ export class MessageProcessor {
     this._graphQLCache = await getGraphQLCache(rootPath, this._extensions);
     let config = getGraphQLConfig(rootPath);
     if (this._extensions && this._extensions.length > 0) {
-      await Promise.all(
+      await Promise.map(
         this._extensions.map(async extension => {
           config = await extension(config);
         }),

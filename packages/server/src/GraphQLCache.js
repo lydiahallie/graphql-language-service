@@ -57,7 +57,7 @@ export async function getGraphQLCache(
 ): Promise<GraphQLCacheInterface> {
   let graphQLConfig = await getGraphQLConfig(configDir);
   if (extensions && extensions.length > 0) {
-    await Promise.all(
+    await Promise.map(
       extensions.map(async extension => {
         graphQLConfig = await extension(graphQLConfig);
       }),
