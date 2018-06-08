@@ -62,12 +62,10 @@ import {getASTNodeAtPosition} from 'graphql-language-service-utils';
 export class GraphQLLanguageService {
   _graphQLCache: GraphQLCache;
   _graphQLConfig: GraphQLConfig;
-  _extensions: ?Array<GraphQLConfig>;
 
-  constructor(cache: GraphQLCache, extensions: ?Array<GraphQLConfig>) {
+  constructor(cache: GraphQLCache) {
     this._graphQLCache = cache;
     this._graphQLConfig = cache.getGraphQLConfig();
-    this._extensions = extensions;
   }
 
   async getDiagnostics(
