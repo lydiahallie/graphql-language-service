@@ -640,13 +640,6 @@ export class GraphQLCache implements GraphQLCacheInterface {
     appName: ?string,
     queryHasExtensions?: ?boolean = false,
   ): Promise<?GraphQLSchema> => {
-    if (this._extensions && this._extensions.length > 0) {
-      await Promise.all(
-        this._extensions.map(async extension => {
-          this._graphQLConfig = await extension(this._graphQLConfig);
-        }),
-      );
-    }
     const projectConfig = this._graphQLConfig.getProjectConfig(appName);
 
     if (!projectConfig) {
