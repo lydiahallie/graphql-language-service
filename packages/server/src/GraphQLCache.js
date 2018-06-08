@@ -58,7 +58,8 @@ export async function getGraphQLCache(
   let graphQLConfig = await getGraphQLConfig(configDir);
   if (extensions && extensions.length > 0) {
     /* eslint-disable no-await-in-loop */
-    for (const extension in extensions) {
+    for (let i = 0; i < extensions.length; i++) {
+      const extension = extensions[i];
       graphQLConfig = await extension(graphQLConfig);
     }
   }
