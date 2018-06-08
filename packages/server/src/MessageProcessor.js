@@ -118,20 +118,16 @@ export class MessageProcessor {
     this._graphQLCache = await getGraphQLCache(rootPath, this._extensions);
     let config = getGraphQLConfig(rootPath);
     if (this._extensions && this._extensions.length > 0) {
-      await Promise.map(
-        this._extensions.map(async extension => {
-          config = await extension(config);
-        }),
-      );
+      /* eslint-disable no-await-in-loop */
+      for (const extension in this._extensions) {
+        config = await extension(config);
+      }
     }
 
     if (this._watchmanClient) {
       this._subcribeWatchman(config, this._watchmanClient);
     }
-    this._languageService = new GraphQLLanguageService(
-      this._graphQLCache,
-      this._extensions,
-    );
+    this._languageService = new GraphQLLanguageService(this._graphQLCache);
 
     if (!serverCapabilities) {
       throw new Error('GraphQL Language Server is not initialized.');

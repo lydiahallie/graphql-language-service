@@ -57,13 +57,12 @@ export async function getGraphQLCache(
 ): Promise<GraphQLCacheInterface> {
   let graphQLConfig = await getGraphQLConfig(configDir);
   if (extensions && extensions.length > 0) {
-    await Promise.map(
-      extensions.map(async extension => {
-        graphQLConfig = await extension(graphQLConfig);
-      }),
-    );
+    /* eslint-disable no-await-in-loop */
+    for (const extension in extensions) {
+      graphQLConfig = await extension(graphQLConfig);
+    }
   }
-  return new GraphQLCache(configDir, graphQLConfig, extensions);
+  return new GraphQLCache(configDir, graphQLConfig);
 }
 
 export class GraphQLCache implements GraphQLCacheInterface {
@@ -77,11 +76,7 @@ export class GraphQLCache implements GraphQLCacheInterface {
   _typeDefinitionsCache: Map<Uri, Map<string, ObjectTypeInfo>>;
   _extensions: ?Array<GraphQLConfig>;
 
-  constructor(
-    configDir: Uri,
-    graphQLConfig: GraphQLConfig,
-    extensions: ?Array<GraphQLConfig>,
-  ): void {
+  constructor(configDir: Uri, graphQLConfig: GraphQLConfig): void {
     this._configDir = configDir;
     this._graphQLConfig = graphQLConfig;
     this._graphQLFileListCache = new Map();
@@ -89,7 +84,6 @@ export class GraphQLCache implements GraphQLCacheInterface {
     this._fragmentDefinitionsCache = new Map();
     this._typeDefinitionsCache = new Map();
     this._typeExtensionMap = new Map();
-    this._extensions = extensions;
   }
 
   getGraphQLConfig = (): GraphQLConfigInterface => this._graphQLConfig;
