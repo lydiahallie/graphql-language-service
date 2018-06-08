@@ -75,7 +75,6 @@ export class GraphQLCache implements GraphQLCacheInterface {
   _typeExtensionMap: Map<Uri, number>;
   _fragmentDefinitionsCache: Map<Uri, Map<string, FragmentInfo>>;
   _typeDefinitionsCache: Map<Uri, Map<string, ObjectTypeInfo>>;
-  _extensions: ?Array<(config: GraphQLConfig) => GraphQLConfig>;
 
   constructor(configDir: Uri, graphQLConfig: GraphQLConfig): void {
     this._configDir = configDir;
