@@ -33,8 +33,8 @@
   },
   "dependencies": {
     "graphql-config": "2.0.1",
-    "graphql-language-service-parser": "^1.1.0",
-    "graphql-language-service-types": "^1.2.1",
-    "graphql-language-service-utils": "^1.2.1"
+    "@divyenduz/graphql-language-service-parser": "1.1.3",
+    "@divyenduz/graphql-language-service-types": "1.1.3",
+    "@divyenduz/graphql-language-service-utils": "1.1.3"
   }
 }
