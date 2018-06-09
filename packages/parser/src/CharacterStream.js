@@ -22,7 +22,7 @@
 import type {
   TokenPattern,
   CharacterStream as CharacterStreamInterface,
-} from 'graphql-language-service-types';
+} from '@divyenduz/graphql-language-service-types';
 
 export default class CharacterStream implements CharacterStreamInterface {
   _start: number;

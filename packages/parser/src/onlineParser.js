@@ -36,7 +36,7 @@ import type {
   CharacterStream,
   State,
   Token,
-} from 'graphql-language-service-types';
+} from '@divyenduz/graphql-language-service-types';
 
 import {LexRules, ParseRules, isIgnored} from './Rules';
 

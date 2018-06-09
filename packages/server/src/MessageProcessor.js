@@ -15,8 +15,8 @@ import type {
   GraphQLCache,
   Range as RangeType,
   Uri,
-} from 'graphql-language-service-types';
-import {FileChangeTypeKind} from 'graphql-language-service-types';
+} from '@divyenduz/graphql-language-service-types';
+import {FileChangeTypeKind} from '@divyenduz/graphql-language-service-types';
 
 import {extname, dirname} from 'path';
 import {readFileSync} from 'fs';
@@ -27,8 +27,8 @@ import {
   GraphQLProjectConfig,
   GraphQLConfig,
 } from 'graphql-config';
-import {GraphQLLanguageService} from 'graphql-language-service-interface';
-import {Position, Range} from 'graphql-language-service-utils';
+import {GraphQLLanguageService} from '@divyenduz/graphql-language-service-interface';
+import {Position, Range} from '@divyenduz/graphql-language-service-utils';
 import {
   CancellationToken,
   NotificationMessage,

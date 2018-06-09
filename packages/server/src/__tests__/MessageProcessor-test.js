@@ -9,7 +9,7 @@
  */
 
 import {expect} from 'chai';
-import {Position, Range} from 'graphql-language-service-utils';
+import {Position, Range} from '@divyenduz/graphql-language-service-utils';
 import {beforeEach, describe, it} from 'mocha';
 
 import {MessageProcessor} from '../MessageProcessor';

@@ -8,7 +8,7 @@
  *  @flow
  */
 
-import type {Uri} from 'graphql-language-service-types';
+import type {Uri} from '@divyenduz/graphql-language-service-types';
 
 import watchman from 'fb-watchman';
 

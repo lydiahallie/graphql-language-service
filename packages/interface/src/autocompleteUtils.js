@@ -20,7 +20,7 @@ import type {
   ContextToken,
   State,
   TypeInfo,
-} from 'graphql-language-service-types';
+} from '@divyenduz/graphql-language-service-types';
 
 // Utility for returning the state representing the Definition this token state
 // is within, if any.

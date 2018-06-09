@@ -8,13 +8,13 @@
  *  @flow
  */
 
-import type {CompletionItem} from 'graphql-language-service-types';
+import type {CompletionItem} from '@divyenduz/graphql-language-service-types';
 
 import {expect} from 'chai';
 import {beforeEach, describe, it} from 'mocha';
 import fs from 'fs';
 import {buildSchema} from 'graphql';
-import {Position} from 'graphql-language-service-utils';
+import {Position} from '@divyenduz/graphql-language-service-utils';
 import path from 'path';
 
 import {getAutocompleteSuggestions} from '../getAutocompleteSuggestions';

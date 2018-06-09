@@ -8,7 +8,7 @@
  *  @flow
  */
 
-import {Position, Range} from 'graphql-language-service-utils';
+import {Position, Range} from '@divyenduz/graphql-language-service-utils';
 
 import {parse} from 'babylon';
 

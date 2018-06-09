@@ -14,9 +14,9 @@
  */
 
 import type {GraphQLSchema} from 'graphql';
-import type {ContextToken} from 'graphql-language-service-types';
+import type {ContextToken} from '@divyenduz/graphql-language-service-types';
 import type {Hover} from 'vscode-languageserver-types';
-import type {Position} from 'graphql-language-service-utils';
+import type {Position} from '@divyenduz/graphql-language-service-utils';
 import {getTokenAtPosition, getTypeInfo} from './getAutocompleteSuggestions';
 import {GraphQLNonNull, GraphQLList} from 'graphql';
 

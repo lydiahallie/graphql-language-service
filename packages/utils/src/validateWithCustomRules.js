@@ -11,7 +11,7 @@
 import type {DocumentNode} from 'graphql/language';
 import type {GraphQLError} from 'graphql/error';
 import type {GraphQLSchema} from 'graphql/type';
-import type {CustomValidationRule} from 'graphql-language-service-types';
+import type {CustomValidationRule} from '@divyenduz/graphql-language-service-types';
 
 import {specifiedRules, TypeInfo, validate} from 'graphql';
 

@@ -19,7 +19,7 @@ import type {
   ObjectTypeInfo,
   Uri,
   GraphQLProjectConfig,
-} from 'graphql-language-service-types';
+} from '@divyenduz/graphql-language-service-types';
 
 import fs from 'fs';
 import path from 'path';

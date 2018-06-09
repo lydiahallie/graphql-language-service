@@ -12,7 +12,7 @@ import net from 'net';
 
 import {GraphQLWatchman} from './GraphQLWatchman';
 import {MessageProcessor} from './MessageProcessor';
-import type {GraphQLConfig} from 'graphql-language-service-types';
+import type {GraphQLConfig} from '@divyenduz/graphql-language-service-types';
 
 import {
   createMessageConnection,

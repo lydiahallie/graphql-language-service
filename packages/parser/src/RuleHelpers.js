@@ -10,7 +10,7 @@
 
 // These functions help build matching rules for ParseRules.
 
-import type {Rule, Token} from 'graphql-language-service-types';
+import type {Rule, Token} from '@divyenduz/graphql-language-service-types';
 
 // An optional rule.
 export function opt(ofRule: Rule | string): Rule {

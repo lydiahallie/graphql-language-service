@@ -18,8 +18,8 @@ import type {
   ContextToken,
   State,
   TypeInfo,
-} from 'graphql-language-service-types';
-import type {Position} from 'graphql-language-service-utils';
+} from '@divyenduz/graphql-language-service-types';
+import type {Position} from '@divyenduz/graphql-language-service-utils';
 
 import {
   GraphQLBoolean,
@@ -37,7 +37,7 @@ import {
   isCompositeType,
   isInputType,
 } from 'graphql';
-import {CharacterStream, onlineParser} from 'graphql-language-service-parser';
+import {CharacterStream, onlineParser} from '@divyenduz/graphql-language-service-parser';
 import {
   forEachState,
   getDefinitionState,

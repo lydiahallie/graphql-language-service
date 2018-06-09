@@ -12,11 +12,11 @@ import type {
   Outline,
   TextToken,
   TokenKind,
-} from 'graphql-language-service-types';
+} from '@divyenduz/graphql-language-service-types';
 
 import {parse, visit} from 'graphql';
 import {INLINE_FRAGMENT} from 'graphql/language/kinds';
-import {offsetToPosition} from 'graphql-language-service-utils';
+import {offsetToPosition} from '@divyenduz/graphql-language-service-utils';
 
 const OUTLINEABLE_KINDS = {
   Field: true,

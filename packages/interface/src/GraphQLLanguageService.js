@@ -24,8 +24,8 @@ import type {
   GraphQLConfig,
   GraphQLProjectConfig,
   Uri,
-} from 'graphql-language-service-types';
-import type {Position} from 'graphql-language-service-utils';
+} from '@divyenduz/graphql-language-service-types';
+import type {Position} from '@divyenduz/graphql-language-service-utils';
 import type {Hover} from 'vscode-languageserver-types';
 
 import {
@@ -57,7 +57,7 @@ import {
   getDefinitionQueryResultForDefinitionNode,
   getDefinitionQueryResultForNamedType,
 } from './getDefinition';
-import {getASTNodeAtPosition} from 'graphql-language-service-utils';
+import {getASTNodeAtPosition} from '@divyenduz/graphql-language-service-utils';
 
 export class GraphQLLanguageService {
   _graphQLCache: GraphQLCache;
@@ -73,11 +73,13 @@ export class GraphQLLanguageService {
     uri: Uri,
     isRelayCompatMode?: boolean,
   ): Promise<Array<Diagnostic>> {
+    console.log('ZEBRA 1:', projectConfig, schemaPath)
     // Perform syntax diagnostics first, as this doesn't require
     // schema/fragment definitions, even the project configuration.
     let queryHasExtensions = false;
     const projectConfig = this._graphQLConfig.getConfigForFile(uri);
     const schemaPath = projectConfig.schemaPath;
+    console.log('ZEBRA:', projectConfig, schemaPath)
     try {
       const queryAST = parse(query);
       if (!schemaPath || uri !== schemaPath) {

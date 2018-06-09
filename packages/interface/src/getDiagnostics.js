@@ -19,16 +19,16 @@ import type {
 import type {
   Diagnostic,
   CustomValidationRule,
-} from 'graphql-language-service-types';
+} from '@divyenduz/graphql-language-service-types';
 
 import invariant from 'assert';
 import {findDeprecatedUsages, parse} from 'graphql';
-import {CharacterStream, onlineParser} from 'graphql-language-service-parser';
+import {CharacterStream, onlineParser} from '@divyenduz/graphql-language-service-parser';
 import {
   Position,
   Range,
   validateWithCustomRules,
-} from 'graphql-language-service-utils';
+} from '@divyenduz/graphql-language-service-utils';
 
 export const SEVERITY = {
   ERROR: 1,

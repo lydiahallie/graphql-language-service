@@ -14,7 +14,7 @@ import {expect} from 'chai';
 import {beforeEach, describe, it} from 'mocha';
 import fs from 'fs';
 import {buildSchema} from 'graphql';
-import {Position} from 'graphql-language-service-utils';
+import {Position} from '@divyenduz/graphql-language-service-utils';
 import path from 'path';
 
 import {getHoverInformation} from '../getHoverInformation';
