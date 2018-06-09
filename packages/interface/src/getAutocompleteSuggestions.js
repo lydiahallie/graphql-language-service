@@ -37,7 +37,10 @@ import {
   isCompositeType,
   isInputType,
 } from 'graphql';
-import {CharacterStream, onlineParser} from '@divyenduz/graphql-language-service-parser';
+import {
+  CharacterStream,
+  onlineParser,
+} from '@divyenduz/graphql-language-service-parser';
 import {
   forEachState,
   getDefinitionState,

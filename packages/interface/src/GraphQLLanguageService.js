@@ -73,13 +73,11 @@ export class GraphQLLanguageService {
     uri: Uri,
     isRelayCompatMode?: boolean,
   ): Promise<Array<Diagnostic>> {
-    console.log('ZEBRA 1:', projectConfig, schemaPath)
     // Perform syntax diagnostics first, as this doesn't require
     // schema/fragment definitions, even the project configuration.
     let queryHasExtensions = false;
     const projectConfig = this._graphQLConfig.getConfigForFile(uri);
     const schemaPath = projectConfig.schemaPath;
-    console.log('ZEBRA:', projectConfig, schemaPath)
     try {
       const queryAST = parse(query);
       if (!schemaPath || uri !== schemaPath) {

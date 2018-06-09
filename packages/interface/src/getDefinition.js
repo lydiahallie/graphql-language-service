@@ -25,7 +25,10 @@ import type {
   Uri,
   ObjectTypeInfo,
 } from '@divyenduz/graphql-language-service-types';
-import {locToRange, offsetToPosition} from '@divyenduz/graphql-language-service-utils';
+import {
+  locToRange,
+  offsetToPosition,
+} from '@divyenduz/graphql-language-service-utils';
 import invariant from 'assert';
 
 export const LANGUAGE = 'GraphQL';

@@ -23,7 +23,10 @@ import type {
 
 import invariant from 'assert';
 import {findDeprecatedUsages, parse} from 'graphql';
-import {CharacterStream, onlineParser} from '@divyenduz/graphql-language-service-parser';
+import {
+  CharacterStream,
+  onlineParser,
+} from '@divyenduz/graphql-language-service-parser';
 import {
   Position,
   Range,
