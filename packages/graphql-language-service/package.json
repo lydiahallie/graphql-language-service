@@ -1,5 +1,8 @@
 {
-  "name": "graphql-language-service",
+  "name": "@divyenduz/graphql-language-service",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": "https://github.com/graphql/graphql-language-service",
   "version": "1.2.0",
   "description": "An interface for building GraphQL language services for IDEs",

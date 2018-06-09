@@ -1,5 +1,8 @@
 {
-  "name": "graphql-language-server",
+  "name": "@divyenduz/graphql-language-server",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "1.0.18",
   "description": "An interface for building GraphQL language services for IDEs",
   "scripts": {

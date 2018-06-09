@@ -1,5 +1,8 @@
 {
-  "name": "graphql-language-service-server",
+  "name": "@divyenduz/graphql-language-service-server",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": "https://github.com/graphql/graphql-language-service",
   "version": "1.2.0",
   "description": "Server process backing the GraphQL Language Service",
