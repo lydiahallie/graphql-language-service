@@ -39,7 +39,7 @@
     "@divyenduz/graphql-language-service-server": "^1.2.5",
     "@divyenduz/graphql-language-service-utils": "^1.2.3",
     "babel-polyfill": "6.16.0",
-    "graphql-config": "2.0.1",
+    "graphql-config": "2.1.0",
     "yargs": "^3.32.0 || ^7.0.0"
   }
 }

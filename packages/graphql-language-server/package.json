@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/graphql/graphql-language-service#readme",
   "dependencies": {
-    "graphql-config": "2.0.1"
+    "graphql-config": "2.1.0"
   }
 }

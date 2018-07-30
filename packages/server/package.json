@@ -38,7 +38,7 @@
     "babylon": "^6.17.4",
     "fb-watchman": "^2.0.0",
     "glob": "^7.1.2",
-    "graphql-config": "2.0.1",
+    "graphql-config": "2.1.0",
     "nullthrows": "^1.0.0",
     "vscode-jsonrpc": "^3.3.0",
     "vscode-languageserver": "^3.3.0"
